@@ -98,11 +98,11 @@
         // 添加蜡烛颜色
         if (open>close)
         {
-            [self.valueColors addObject:[UIColor redColor]];
+            [self.valueColors addObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
         }
         else
         {
-             [self.valueColors addObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
+             [self.valueColors addObject:[UIColor redColor]];
         }
         
         // 获取最后一个蜡烛的时间
@@ -115,17 +115,14 @@
     // 蜡烛样式
     CandleChartDataSet *set1 = [[CandleChartDataSet alloc] initWithValues:yVals1 label:@"Data Set"];
     set1.axisDependency = AxisDependencyLeft;
-    //        [set1 setColor:[UIColor redColor]];
-    //        NSArray *colors = [NSArray arrayWithObjects:[UIColor redColor],[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f], nil];
-    //        [set1 setColors:colors];
     
     set1.colors = self.valueColors;
     
     set1.drawIconsEnabled = NO;
     set1.shadowWidth = 1;
-    set1.decreasingColor = UIColor.redColor;
+    set1.decreasingColor = [UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f];
     set1.decreasingFilled = YES;
-    set1.increasingColor = [UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f];
+    set1.increasingColor = UIColor.redColor;
     set1.increasingFilled = YES;
     //        set1.neutralColor = UIColor.blueColor;
     
@@ -245,11 +242,11 @@
                 // 设置最后蜡烛颜色
                 if (open>bid)
                 {
-                    [self.valueColors replaceObjectAtIndex:self.valueColors.count-1 withObject:[UIColor redColor]];
+                    [self.valueColors replaceObjectAtIndex:self.valueColors.count-1 withObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
                 }
                 else
                 {
-                     [self.valueColors replaceObjectAtIndex:self.valueColors.count-1 withObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
+                     [self.valueColors replaceObjectAtIndex:self.valueColors.count-1 withObject:[UIColor redColor]];
                 }
                 set1.colors = self.valueColors;
                 
@@ -267,17 +264,16 @@
                     // 设置最后蜡烛颜色
                     if (open>bid)
                     {
-                        [self.valueColors addObject:[UIColor redColor]];
+                        [self.valueColors addObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
                     }
                     else
                     {
-                        [self.valueColors addObject:[UIColor colorWithRed:122/255.f green:242/255.f blue:84/255.f alpha:1.f]];
+                        [self.valueColors addObject:[UIColor redColor]];
                     }
                     self.isLoading=NO;
                 }
                  set1.values = self.dataArray;
             }
-            
             
             // 通知控件刷新界面
              [_chartView notifyDataSetChanged];
@@ -286,6 +282,7 @@
     }
     
 }
+
 -(bool)ShouldReLoad:(NSDate*)lastDate nowDate:(NSDate*)nowDate
 {
      bool isNeedReload = NO;
@@ -386,7 +383,7 @@
     _chartView.scaleXEnabled = YES;
 //    _chartView.scaleYEnabled = NO;
     _chartView.autoScaleMinMaxEnabled=YES;
-    
+    _chartView.highlightPerDragEnabled  = YES;//能否拖拽亮度线
     
     _chartView.drawGridBackgroundEnabled = YES;
     _chartView.gridBackgroundColor = [UIColor blackColor];
@@ -495,7 +492,10 @@
 {
     NSLog(@"chartValueNothingSelected");
 }
-
+//-(void)chartTranslated:(ChartViewBase *)chartView dX:(CGFloat)dX dY:(CGFloat)dY
+//{
+//    
+//}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

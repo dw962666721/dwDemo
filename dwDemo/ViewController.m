@@ -24,6 +24,7 @@
 @property (nonatomic, strong)SRWebSocket * webSocketNumber;
 @property NSString *starTime;
 @property bool isLoading; // 正在短链接刷新
+@property NSString *timeString;
 @end
 
 @implementation ViewController
@@ -274,9 +275,17 @@
                 }
                  set1.values = self.dataArray;
             }
-            
+
             // 通知控件刷新界面
              [_chartView notifyDataSetChanged];
+            
+            // 设置延时，单位秒
+            double delay = 2;
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delay * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                //  1秒后需要执行的任务
+                 _chartView.autoScaleMinMaxEnabled=NO;
+            });
+          
             
         }
     }
@@ -382,7 +391,7 @@
     _chartView.pinchZoomEnabled = NO;
     _chartView.scaleXEnabled = YES;
 //    _chartView.scaleYEnabled = NO;
-    _chartView.autoScaleMinMaxEnabled=YES;
+    _chartView.autoScaleMinMaxEnabled=YES; // 自动设置Y最大最小值
     _chartView.highlightPerDragEnabled  = YES;//能否拖拽亮度线
     
     _chartView.drawGridBackgroundEnabled = YES;
@@ -429,13 +438,80 @@
 //    rightAxis.axisMinimum = 1.21095;
     rightAxis.gridLineDashLengths = @[@1.f, @1.f];
     rightAxis.drawZeroLineEnabled = NO;
-    rightAxis.drawLimitLinesBehindDataEnabled = YES;
+    rightAxis.drawLimitLinesBehindDataEnabled = YES; // 限制线在数据前面
     
     _chartView.legend.enabled = NO;
-    
     // 获取数据
     [self loadData];
 }
+
+- (IBAction)UserClick:(id)sender
+{
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
+    
+    [formatter setDateStyle:NSDateFormatterMediumStyle];
+    
+    [formatter setTimeStyle:NSDateFormatterShortStyle];
+    
+    [formatter setDateFormat:@"YYYY-MM-dd HH:mm:ss"];
+    
+    UIButton *button = sender;
+    //时间转时间戳的方法:
+    
+    NSInteger timeSp = [[NSNumber numberWithDouble:[[NSDate date] timeIntervalSince1970]] integerValue];
+    if ([button.titleLabel.text isEqualToString:@"m1"])
+    {
+        self.buttonString = @"m1";
+        
+        NSInteger startTime = timeSp - 1 * 24 * 3600;
+        
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:startTime];
+        
+        NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+        
+        
+        NSArray *array = [confromTimespStr componentsSeparatedByString:@" "]; //从字符A中分隔成2个元素的数组
+        
+        self.timeString = [NSString stringWithFormat:@"%@T%@Z",array.firstObject,array.lastObject];
+        
+        [self loadData];
+    }
+    if ([button.titleLabel.text isEqualToString:@"m5"])
+    {
+        self.buttonString = @"m5";
+        
+        NSInteger startTime = timeSp - 5 * 24 * 3600;
+        
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:startTime];
+        
+        NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+        
+        
+        NSArray *array = [confromTimespStr componentsSeparatedByString:@" "]; //从字符A中分隔成2个元素的数组
+        
+        self.timeString = [NSString stringWithFormat:@"%@T%@Z",array.firstObject,array.lastObject];
+        
+        [self loadData];
+    }
+    if ([button.titleLabel.text isEqualToString:@"m15"])
+    {
+        self.buttonString = @"m15";
+        
+        NSInteger startTime = timeSp - 15 * 24 * 3600;
+        
+        NSDate *confromTimesp = [NSDate dateWithTimeIntervalSince1970:startTime];
+        
+        NSString *confromTimespStr = [formatter stringFromDate:confromTimesp];
+        
+        
+        NSArray *array = [confromTimespStr componentsSeparatedByString:@" "]; //从字符A中分隔成2个元素的数组
+        
+        self.timeString = [NSString stringWithFormat:@"%@T%@Z",array.firstObject,array.lastObject];
+        
+        [self loadData];
+    }
+}
+
 - (void)updateChartData
 {
     if (self.shouldHideData)
@@ -492,10 +568,13 @@
 {
     NSLog(@"chartValueNothingSelected");
 }
-//-(void)chartTranslated:(ChartViewBase *)chartView dX:(CGFloat)dX dY:(CGFloat)dY
-//{
-//    
-//}
+-(void)chartTranslated:(ChartViewBase *)chartView dX:(CGFloat)dX dY:(CGFloat)dY
+{
+//    if (dX<2) {
+//        return;
+//    }
+     _chartView.autoScaleMinMaxEnabled=YES;
+}
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.

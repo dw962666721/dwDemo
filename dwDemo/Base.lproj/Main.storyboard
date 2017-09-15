@@ -33,16 +33,25 @@
                                         <rect key="frame" x="0.0" y="8" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="m1"/>
+                                        <connections>
+                                            <action selector="UserClick:" destination="BYZ-38-t0r" eventType="touchDragInside" id="jix-QP-Rf3"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKi-4M-r0U">
                                         <rect key="frame" x="54" y="8" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="m5"/>
+                                        <connections>
+                                            <action selector="UserClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="ESu-18-Ibl"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vsi-yk-xAE">
                                         <rect key="frame" x="108" y="8" width="46" height="30"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="m15"/>
+                                        <connections>
+                                            <action selector="UserClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="s7m-l2-wJH"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b3T-Uh-c1N">
                                         <rect key="frame" x="162" y="8" width="46" height="30"/>

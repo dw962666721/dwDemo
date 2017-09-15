@@ -54,6 +54,7 @@
                 
                 _chartView.xAxis.axisMaximum = self.dataArray.count+10;
                 
+                _chartView.autoScaleMinMaxEnabled = YES;
                 // 绑定数据
                 CandleChartData *data = [[CandleChartData alloc] initWithDataSet:set1];
                 _chartView.data = data;

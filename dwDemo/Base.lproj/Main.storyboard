@@ -34,7 +34,7 @@
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <state key="normal" title="m1"/>
                                         <connections>
-                                            <action selector="UserClick:" destination="BYZ-38-t0r" eventType="touchDragInside" id="jix-QP-Rf3"/>
+                                            <action selector="UserClick:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Dhp-cH-VUO"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKi-4M-r0U">

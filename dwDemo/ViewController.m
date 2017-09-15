@@ -66,7 +66,8 @@
                 // 启动socket
                 [self loadSocketData];
                 
-                [_chartView zoomWithScaleX:100 scaleY:0 x:0 y:0];
+                [_chartView zoomWithScaleX:0 scaleY:0 x:0 y:0];
+                [_chartView zoomWithScaleX:self.dataArray.count*0.04 scaleY:0 x:0 y:0];
                 CandleChartDataEntry *entry = self.dataArray.lastObject;
                 //将最后的数据滑动到中间
                 [_chartView centerViewToAnimatedWithXValue:entry.x yValue:entry.y axis:[_chartView.data getDataSetByIndex:0].axisDependency duration:0.25];
